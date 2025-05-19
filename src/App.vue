@@ -1,9 +1,10 @@
 <template>
-  <div class="container mt-5">
-    <h1 class="text-primary">Bienvenue sur mon site Vue + Bootstrap !</h1>
-    <button>Clique ici</button>
+  <div class="navbar">
+    <nav>
+      <router-link to="/ajout">Ajout</router-link>
+      <router-link to="/MAJ">MAj</router-link>
+      <router-link to="/">Gaphe</router-link>
+    </nav>
+    <router-view />
   </div>
-  <i class="fas fa-user"></i>
-  <i class="fab fa-github"></i>
-  <i class="fas fa-check-circle text-success"></i>
 </template>
