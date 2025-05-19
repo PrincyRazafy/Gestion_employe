@@ -1,20 +1,20 @@
 <template>
-  <div class="bg-dark text-light min-vh-100 position-relative overflow-hidden">
-    <!-- Fond lumineux -->
+  <div class="row">
     <nav
-      class="navbar navbar-expand-lg navbar-dark bg-dark px-4 position-relative z-1"
+      class="navbar navbar-expand-lg navbar-dark bg-dark px-4 position-relative z-1 py-3 shadow-lg"
     >
-      <ul class="navbar-nav ms-auto d-flex gap-3">
-        <li class="nav-item">
-          <router-link to="/ajout">Ajout</router-link>
-          <router-link to="/MAJ">MAj</router-link>
-          <router-link to="/">Gaphe</router-link>
-        </li>
-      </ul>
+      <div class="container-fluid">
+        <div class="ms-auto d-flex gap-3 fs-0">
+          <router-link class="nav-link text-white" to="/ajout"
+            >Ajout</router-link
+          >
+          <router-link class="nav-link text-white" to="/MAJ">MAJ</router-link>
+          <router-link class="nav-link text-white" to="/">Graphe</router-link>
+        </div>
+      </div>
     </nav>
   </div>
-  <div class="navbar">
+  <div class="row">
     <router-view />
-    <br />
   </div>
 </template>
