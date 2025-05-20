@@ -118,8 +118,7 @@ h2 {
 }
 </style>
 <script setup>
-import { ref, computed } from "vue";
-
+import { computed, ref } from "vue";
 const nom = ref("");
 const prenom = ref("");
 const salaire = ref();

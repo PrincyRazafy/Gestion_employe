@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <nav
-      class="navbar navbar-expand-lg navbar-dark bg-dark px-4 position-relative z-1 py-3 shadow-lg"
+      class="navbar navbar-expand-lg navbar-dark bg-dark px-4 position-relative z-1 py-3 white-shadow"
     >
       <div class="container-fluid">
         <div class="ms-auto d-flex gap-3 fs-0">
@@ -18,24 +18,11 @@
     <router-view />
   </div>
 </template>
-<script setup></script>
 <style scoped>
-.center {
-  background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #0f2027);
-  background-size: 400% 400%;
-  animation: gradientMove 5s ease infinite;
-  height: 89vh;
+.white-shadow {
+  box-shadow: 0 0.5rem 1rem rgba(248, 170, 0, 0.3);
 }
-
-@keyframes gradientMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+.nav-link:hover {
+  color: #ffe082 !important;
 }
 </style>
