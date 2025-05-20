@@ -120,7 +120,6 @@ h2 {
 <script setup>
 import { ref, computed } from "vue";
 import axios from "axios";
-
 const nom = ref("");
 const prenom = ref("");
 const salaire = ref();
