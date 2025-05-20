@@ -4,7 +4,7 @@
       <h2 class="mt-4">Ajouter un employé</h2>
     </div>
     <div class="row mt-3 fomu">
-      <form action="">
+      <form @submit.prevent="ajouterEmploye">
         <div class="row mb-4 mt-4">
           <label class="row mb-1">Nom:</label>
           <div class="row">
@@ -118,7 +118,8 @@ h2 {
 }
 </style>
 <script setup>
-import { computed, ref } from "vue";
+import { ref, computed } from "vue";
+import axios from "axios";
 const nom = ref("");
 const prenom = ref("");
 const salaire = ref();
@@ -128,4 +129,34 @@ const touche2 = ref(false);
 const estValide = computed(() => /^[A-Za-zÀ-ÿ\s'-]{3,}$/.test(nom.value));
 const estValide1 = computed(() => /^[A-Za-zÀ-ÿ\s'-]{3,}$/.test(prenom.value));
 const estValide2 = computed(() => salaire.value > 0);
+
+const ajouterEmploye = async () => {
+  if (estValide.value && estValide1.value && estValide2.value) {
+    try {
+      const response = await axios.post(
+        "http://localhost/GestionEmp/ajout_emp.php",
+        {
+          nom: nom.value,
+          prenom: prenom.value,
+          salaire: salaire.value,
+        }
+      );
+
+      if (response.data.success) {
+        alert("Employé ajouté avec succès !");
+        nom.value = "";
+        prenom.value = "";
+        salaire.value = null;
+        touche.value = touche1.value = touche2.value = false;
+      } else {
+        alert("Erreur: " + response.data.message);
+      }
+    } catch (error) {
+      alert("Erreur lors de la connexion au serveur.");
+      console.error(error);
+    }
+  } else {
+    alert("Veuillez corriger les erreurs dans le formulaire.");
+  }
+};
 </script>
