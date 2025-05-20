@@ -1,6 +1,8 @@
-import "@fortawesome/fontawesome-free/css/all.min.css";
+import "@fontsource/fredoka";
 import "@fontsource/merriweather";
 import "@fontsource/poetsen-one";
+import "@fontsource/roboto";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { createApp } from "vue";

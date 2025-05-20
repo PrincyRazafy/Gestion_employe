@@ -118,8 +118,8 @@ h2 {
 }
 </style>
 <script setup>
-import { ref, computed } from "vue";
 import axios from "axios";
+import { computed, ref } from "vue";
 const nom = ref("");
 const prenom = ref("");
 const salaire = ref();
@@ -141,7 +141,6 @@ const ajouterEmploye = async () => {
           salaire: salaire.value,
         }
       );
-
       if (response.data.success) {
         alert("Employé ajouté avec succès !");
         nom.value = "";

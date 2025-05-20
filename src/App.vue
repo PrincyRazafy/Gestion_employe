@@ -21,6 +21,7 @@
 <style scoped>
 .white-shadow {
   box-shadow: 0 0.5rem 1rem rgba(248, 170, 0, 0.3);
+  font-family: "Fredoka", sans-serif;
 }
 .nav-link:hover {
   color: #ffe082 !important;
