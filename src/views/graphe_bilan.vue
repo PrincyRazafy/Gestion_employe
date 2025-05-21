@@ -40,9 +40,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import Chart from "chart.js/auto";
 import axios from "axios";
+import Chart from "chart.js/auto";
+import { onMounted, ref } from "vue";
 const employes = ref([]);
 const categories = ref([]);
 const salairePie = ref(null);
@@ -93,6 +93,13 @@ onMounted(async () => {
           duration: 4000,
           easing: "easeOutBounce",
         },
+        plugins: {
+          legend: {
+            labels: {
+              color: "#fff",
+            },
+          },
+        },
       },
     });
 
@@ -122,13 +129,23 @@ onMounted(async () => {
         plugins: {
           legend: {
             display: false,
+            labels: {
+              color: "#fff",
+            },
+          },
+          title: {
+            color: "#fff",
           },
         },
         scales: {
           y: {
             type: "logarithmic",
             beginAtZero: true,
-            title: { display: true, text: "Salaire (€)" },
+            title: { display: true, text: "Salaire (€)", color: "#fff" },
+            ticks: { color: "#fff" },
+          },
+          x: {
+            ticks: { color: "#fff" },
           },
         },
       },
@@ -147,12 +164,12 @@ onMounted(async () => {
   margin-top: 50px;
   border-radius: 5px;
   padding: 10px;
-  background-color: rgb(255, 255, 255);
+  background-color: #2c5364;
   font-family: "Merriweather", serif;
 }
 h6 {
   font-family: "Poetsen One", sans-serif;
-  color: #2f3131;
+  color: #dfe5e7;
 }
 ul {
   list-style-type: none;
@@ -162,7 +179,7 @@ ul {
   justify-content: center;
   align-items: center;
   font-family: "Merriweather", serif;
-  color: #2f3131;
+  color: #fff;
   font-size: 11px;
 }
 li {
@@ -183,5 +200,14 @@ li {
 }
 .red {
   background: #f44336;
+}
+.row,
+.box,
+ul,
+li,
+span,
+div,
+p {
+  color: #fff;
 }
 </style>
