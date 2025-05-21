@@ -27,6 +27,11 @@
 .nav-link:hover {
   color: #ffe082 !important;
 }
+.router-link-active {
+  color: #ffd700 !important;
+  font-weight: bold;
+}
+
 .center {
   padding-top: 80px;
 }
