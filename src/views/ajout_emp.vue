@@ -119,7 +119,9 @@ h2 {
 </style>
 <script setup>
 import axios from "axios";
+import Swal from "sweetalert2";
 import { computed, ref } from "vue";
+
 const nom = ref("");
 const prenom = ref("");
 const salaire = ref();
@@ -141,21 +143,45 @@ const ajouterEmploye = async () => {
           salaire: salaire.value,
         }
       );
+
       if (response.data.success) {
-        alert("Employé ajouté avec succès !");
+        await Swal.fire({
+          icon: "success",
+          title: "Succès",
+          text: "Employé ajouté avec succès !",
+          showConfirmButton: false,
+          timer: 2000,
+          position: "center",
+        });
+
         nom.value = "";
         prenom.value = "";
         salaire.value = null;
         touche.value = touche1.value = touche2.value = false;
       } else {
-        alert("Erreur: " + response.data.message);
+        Swal.fire({
+          icon: "error",
+          title: "Erreur",
+          text: "Erreur : " + response.data.message,
+          position: "center",
+        });
       }
     } catch (error) {
-      alert("Erreur lors de la connexion au serveur.");
+      Swal.fire({
+        icon: "error",
+        title: "Erreur serveur",
+        text: "Erreur lors de la connexion au serveur.",
+        position: "center",
+      });
       console.error(error);
     }
   } else {
-    alert("Veuillez corriger les erreurs dans le formulaire.");
+    Swal.fire({
+      icon: "warning",
+      title: "Champs invalides",
+      text: "Veuillez corriger les erreurs dans le formulaire.",
+      position: "center",
+    });
   }
 };
 </script>
