@@ -5,7 +5,7 @@
         v-model="recherche"
         type="text"
         class="form-control w-25"
-        placeholder="Rechercher par nom..."
+        placeholder="Rechercher par nom ou prenom"
       />
       <div class="d-flex gap-2">
         <button class="btn btn-outline-info" @click="modifier">Modifier</button>
