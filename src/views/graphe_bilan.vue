@@ -40,9 +40,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import Chart from "chart.js/auto";
 import axios from "axios";
+import Chart from "chart.js/auto";
+import { onMounted, ref } from "vue";
 const employes = ref([]);
 const categories = ref([]);
 const salairePie = ref(null);
