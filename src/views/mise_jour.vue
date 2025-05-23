@@ -8,8 +8,8 @@
         placeholder="Rechercher par nom ou prenom"
       />
       <div class="d-flex gap-2">
-        <template v-if="!modeedit"
-          ><button
+        <template v-if="!modeedit">
+          <button
             class="btn btn-outline-info"
             @click="modifie"
             :disabled="modesupp"
@@ -17,11 +17,13 @@
             Modifier
           </button>
         </template>
+
         <template v-if="modeedit"
           ><button class="btn btn-outline-info" @click="enregistre">
             Enregistrer
           </button>
         </template>
+
         <template v-if="!modesupp && !modeedit"
           ><button class="btn btn-outline-danger" @click="supprime">
             Supprimer
@@ -44,7 +46,7 @@
           <th>Observation</th>
         </tr>
       </thead>
-      <tbody>
+      <transition-group name="slide-left" tag="tbody">
         <tr v-for="employe in donneesFiltrees" :key="employe.numEmp">
           <td
             :style="{
@@ -128,7 +130,7 @@
             </template>
           </td>
         </tr>
-      </tbody>
+      </transition-group>
     </table>
   </div>
 </template>
@@ -140,6 +142,20 @@ import { computed, onMounted, ref } from "vue";
 
 const employes = ref([]);
 const recherche = ref("");
+const animationaff = ref([]);
+
+const affichageprogs = async () => {
+  animationaff.value = [];
+  let i = 0;
+  const interval = setInterval(() => {
+    if (i >= employes.value.length) {
+      clearInterval(interval);
+    } else {
+      animationaff.value.push(employes.value[i]);
+      i++;
+    }
+  }, 300);
+};
 
 const obs = (salaire) => {
   if (salaire < 1000) return "Médiocre";
@@ -152,6 +168,7 @@ const afficherEmploye = async () => {
       "http://localhost/GestionEmp/affichageemp.php"
     );
     employes.value = response.data;
+    affichageprogs();
   } catch (error) {
     console.error(
       "Une erreur est survenue lors de la récupération des employés :",
@@ -161,14 +178,12 @@ const afficherEmploye = async () => {
 };
 
 const donneesFiltrees = computed(() => {
-  if (!recherche.value) return employes.value;
-  const rechercheLower = recherche.value.toLowerCase();
-  return employes.value.filter(
-    (employes) =>
-      employes.nom.toLowerCase().includes(rechercheLower) ||
-      employes.prenom.toLowerCase().includes(rechercheLower)
+  const r = recherche.value.toLowerCase();
+  return animationaff.value.filter(
+    (e) => e.nom.toLowerCase().includes(r) || e.prenom.toLowerCase().includes(r)
   );
 });
+
 onMounted(afficherEmploye);
 
 ///////////////// Modification et suppression ////////////////
@@ -243,7 +258,7 @@ const supprimeEmploye = async (numEmp) => {
       numEmp: numEmp,
     });
     employes.value = employes.value.filter((e) => e.numEmp !== numEmp);
-
+    animationaff.value = animationaff.value.filter((e) => e.numEmp !== numEmp);
     Swal.fire({
       icon: "success",
       title: "Supprimé",
@@ -268,5 +283,29 @@ const supprimeEmploye = async (numEmp) => {
   font-family: "Roboto", sans-serif;
   padding: 1rem;
   text-align: center;
+}
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: all 0.5s ease;
+}
+
+.slide-left-enter-from {
+  opacity: 0;
+  transform: translateX(100px);
+}
+
+.slide-left-enter-to {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-left-leave-from {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-left-leave-to {
+  opacity: 0;
+  transform: translateX(100px);
 }
 </style>
