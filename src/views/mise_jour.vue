@@ -312,7 +312,7 @@ thead th {
   z-index: 1;
 }
 
-h1 {
+h2 {
   color: #dfe5e7;
   font-family: "Poetsen One", sans-serif;
 }

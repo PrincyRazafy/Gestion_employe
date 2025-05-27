@@ -156,7 +156,7 @@ onMounted(async () => {
 });
 </script>
 
-<style>
+<style scoped>
 .box {
   height: 450px;
   width: 500px;

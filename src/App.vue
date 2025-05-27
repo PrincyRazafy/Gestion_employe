@@ -4,6 +4,7 @@
       class="navbar navbar-expand-lg navbar-dark bg-dark px-4 py-3 white-shadow fixed-top"
     >
       <div class="container-fluid">
+        <typed />
         <div class="ms-auto d-flex gap-3 fs-0">
           <router-link class="nav-link text-white" to="/ajout"
             >Ajout</router-link
@@ -28,6 +29,9 @@
     </div>
   </footer>
 </template>
+<script setup>
+import typed from "./components/typed_js.vue";
+</script>
 <style scoped>
 .btn-logout {
   background-color: #ffe082;

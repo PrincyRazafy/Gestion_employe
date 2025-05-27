@@ -77,7 +77,7 @@
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 .fomu {
   width: 500px;
   height: 400px;
