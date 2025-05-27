@@ -13,11 +13,20 @@
           <router-link class="nav-link text-white" to="/graphe"
             >Graphe</router-link
           >
-          <button class="btn btn-warning btn-sm ms-3" @click="logout">
-            Déconnexion
-          </button>
         </div>
       </div>
+      <footer
+        class="bg-dark text-white py-2 white-shadow fixed-bottom text-center"
+      >
+        <div
+          class="container d-flex justify-content-between align-items-center"
+        >
+          <button class="btn-logout" @click="logout">
+            <i class="fas fa-power-off"></i>
+          </button>
+          <p class="mb-0">&copy; 2025</p>
+        </div>
+      </footer>
     </nav>
     <div class="container center mt-3 pt-5">
       <router-view />
@@ -46,14 +55,28 @@
 import { ref, onMounted } from "vue";
 import login from "./views/login_page.vue";
 import { useRouter } from "vue-router";
+import Swal from "sweetalert2";
 
 const isLoggedIn = ref(false);
 const router = useRouter();
 
-const logout = () => {
-  localStorage.removeItem("isLoggedIn");
-  router.push("/login");
-  window.location.reload();
+const logout = async () => {
+  const result = await Swal.fire({
+    title: "Êtes-vous sûr ?",
+    text: "Voulez-vous vraiment vous déconnecter?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Oui",
+    cancelButtonText: "Annuler",
+    position: "center",
+  });
+  if (result.isConfirmed) {
+    localStorage.removeItem("isLoggedIn");
+    router.push("/login");
+    window.location.reload();
+  }
 };
 
 onMounted(() => {
