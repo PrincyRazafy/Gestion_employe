@@ -7,17 +7,17 @@ import { onMounted, ref } from "vue";
 const noms = ["Princy", "Fahazavana", "Miahy"];
 const displayedText = ref("");
 
-let currentTextIndex = 0;
-let charIndex = 0;
-let typing = true;
+let currentTextIndex = 0; //index du mot en cours noms[0],....
+let charIndex = 0; //position dans le mot noms.length
+let typing = true; // if true on ecrit, false si on efface
 
 onMounted(() => {
-  const typeSpeed = 100;
-  const backSpeed = 50;
-  const pauseTime = 1000;
+  const typeSpeed = 100; // vitesse d'ecriture en ms
+  const backSpeed = 50; // vitesse d'effacementen ms
+  const pauseTime = 1000; // pause apres l'ecriture
 
   const type = () => {
-    const currentText = noms[currentTextIndex];
+    const currentText = noms[currentTextIndex]; // noms[0]
 
     if (typing) {
       if (charIndex < currentText.length) {
@@ -25,7 +25,7 @@ onMounted(() => {
         charIndex++;
         setTimeout(type, typeSpeed);
       } else {
-        typing = false;
+        typing = false; // on arret l'ecriture
         setTimeout(type, pauseTime);
       }
     } else {
