@@ -22,8 +22,8 @@
   </div>
   <footer class="bg-dark text-white py-2 white-shadow fixed-bottom text-center">
     <div class="container d-flex justify-content-between align-items-center">
-      <button class="btn-logout">
-        <i class="fas fa-sign-out-alt"></i>
+      <button class="btn-logout" @click="logout">
+        <i class="fas fa-power-off"></i>
       </button>
       <p class="mb-0">&copy; 2025</p>
     </div>
