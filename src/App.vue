@@ -1,5 +1,6 @@
 <template>
-  <div class="row">
+  <login v-if="!isLoggedIn" />
+  <div v-else class="row">
     <nav
       class="navbar navbar-expand-lg navbar-dark bg-dark px-4 py-3 white-shadow fixed-top"
     >
@@ -9,13 +10,18 @@
             >Ajout</router-link
           >
           <router-link class="nav-link text-white" to="/MAJ">MAJ</router-link>
-          <router-link class="nav-link text-white" to="/">Graphe</router-link>
+          <router-link class="nav-link text-white" to="/graphe"
+            >Graphe</router-link
+          >
+          <button class="btn btn-warning btn-sm ms-3" @click="logout">
+            Déconnexion
+          </button>
         </div>
       </div>
     </nav>
-  </div>
-  <div class="center mt-3 pt-5">
-    <router-view />
+    <div class="container center mt-3 pt-5">
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -31,8 +37,29 @@
   color: #ffd700 !important;
   font-weight: bold;
 }
-
 .center {
   padding-top: 80px;
 }
 </style>
+
+<script setup>
+import { ref, onMounted } from "vue";
+import login from "./views/login_page.vue";
+import { useRouter } from "vue-router";
+
+const isLoggedIn = ref(false);
+const router = useRouter();
+
+const logout = () => {
+  localStorage.removeItem("isLoggedIn");
+  router.push("/login");
+  window.location.reload();
+};
+
+onMounted(() => {
+  isLoggedIn.value = localStorage.getItem("isLoggedIn") === "true";
+  window.addEventListener("storage", () => {
+    isLoggedIn.value = localStorage.getItem("isLoggedIn") === "true";
+  });
+});
+</script>

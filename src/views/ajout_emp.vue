@@ -150,7 +150,7 @@ const ajouterEmploye = async () => {
           title: "Succès",
           text: "Employé ajouté avec succès !",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 3000,
           position: "center",
         });
 
