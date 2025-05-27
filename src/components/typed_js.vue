@@ -26,7 +26,7 @@ onMounted(() => {
         setTimeout(type, typeSpeed);
       } else {
         typing = false; // on arret l'ecriture
-        setTimeout(type, pauseTime);
+        setTimeout(type, pauseTime); // on appelle type apres la pause
       }
     } else {
       if (charIndex > 0) {
