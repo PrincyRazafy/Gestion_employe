@@ -9,7 +9,9 @@
             >Ajout</router-link
           >
           <router-link class="nav-link text-white" to="/MAJ">MAJ</router-link>
-          <router-link class="nav-link text-white" to="/">Graphe</router-link>
+          <router-link class="nav-link text-white" to="/bilan"
+            >Graphe</router-link
+          >
         </div>
       </div>
     </nav>
@@ -17,9 +19,28 @@
   <div class="center mt-3 pt-5">
     <router-view />
   </div>
+  <footer class="bg-dark text-white py-2 white-shadow fixed-bottom text-center">
+    <div class="container d-flex justify-content-between align-items-center">
+      <button class="btn-logout">
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
+      <p class="mb-0">&copy; 2025</p>
+    </div>
+  </footer>
 </template>
-
 <style scoped>
+.btn-logout {
+  background-color: #ffe082;
+  transition: background-color 0.3s ease;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-logout:hover {
+  background-color: #ffd700;
+}
+
 .white-shadow {
   box-shadow: 0 0.5rem 1rem rgba(248, 170, 0, 0.3);
   font-family: "Fredoka", sans-serif;

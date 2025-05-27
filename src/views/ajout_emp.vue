@@ -121,6 +121,9 @@ h2 {
 import axios from "axios";
 import Swal from "sweetalert2";
 import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
 
 const nom = ref("");
 const prenom = ref("");
@@ -150,9 +153,10 @@ const ajouterEmploye = async () => {
           title: "Succès",
           text: "Employé ajouté avec succès !",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 3000,
           position: "center",
         });
+        router.push("/MAJ");
 
         nom.value = "";
         prenom.value = "";

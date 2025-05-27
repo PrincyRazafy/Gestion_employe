@@ -6,6 +6,10 @@ import { createRouter, createWebHistory } from "vue-router";
 const routes = [
   {
     path: "/",
+    redirect: "/bilan",
+  },
+  {
+    path: "/bilan",
     name: "graphe_bilan",
     component: graphe_bilan,
   },
