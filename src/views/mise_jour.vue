@@ -7,6 +7,9 @@
         class="form-control w-25"
         placeholder="Rechercher par nom ou prenom"
       />
+      <div>
+        <h2>{{ titre }}</h2>
+      </div>
       <div class="d-flex gap-2">
         <template v-if="!modeedit">
           <button
@@ -36,102 +39,103 @@
         </template>
       </div>
     </div>
-
-    <table class="table table-bordered table-hover">
-      <thead class="table-dark">
-        <tr>
-          <th>Numero</th>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Observation</th>
-        </tr>
-      </thead>
-      <transition-group name="slide-left" tag="tbody">
-        <tr v-for="employe in donneesFiltrees" :key="employe.numEmp">
-          <td
-            :style="{
-              backgroundColor: '#2c5364',
-              color: 'white',
-            }"
-          >
-            {{ employe.numEmp }}
-          </td>
-          <td
-            :style="{
-              backgroundColor: '#2c5364',
-              color: 'white',
-              textAlign: 'center',
-            }"
-          >
-            <template v-if="modeedit">
-              <input
-                v-model="employe.nom"
-                class="form-control form-control-sm"
-                :style="{
-                  backgroundColor: '#2c5364',
-                  color: 'white',
-                  border: 'none',
-                }"
-              />
-            </template>
-            <template v-else>
-              {{ employe.nom }}
-            </template>
-          </td>
-          <td :style="{ backgroundColor: '#2c5364', color: 'white' }">
-            <template v-if="modeedit">
-              <input
-                v-model="employe.prenom"
-                class="form-control form-control-sm"
-                :style="{
-                  backgroundColor: '#2c5364',
-                  color: 'white',
-                  border: 'none',
-                }"
-              />
-            </template>
-            <template v-else>
-              {{ employe.prenom }}
-            </template>
-          </td>
-          <td :style="{ backgroundColor: '#2c5364', color: 'white' }">
-            <template v-if="modeedit"
-              ><input
-                type="number"
-                v-model.number="employe.Salaire"
-                class="form-control form-control-sm"
-                :style="{
-                  backgroundColor: '#2c5364',
-                  color: 'white',
-                  border: 'none',
-                }"
-              />
-            </template>
-            <template v-else>
-              {{ obs(employe.Salaire) }}
-            </template>
-          </td>
-          <td
-            v-if="modesupp"
-            :style="{
-              backgroundColor: '#2c5364',
-              color: 'white',
-              cursor: 'pointer',
-            }"
-          >
-            <template v-if="modesupp">
-              <span
-                @click="supprimeEmploye(employe.numEmp)"
-                title="Supprimer l'employé"
-                class="fas fa-xmark"
-                style="color: red"
-              >
-              </span>
-            </template>
-          </td>
-        </tr>
-      </transition-group>
-    </table>
+    <div class="table-container">
+      <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th>Numero</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Observation</th>
+          </tr>
+        </thead>
+        <transition-group name="slide-left" tag="tbody">
+          <tr v-for="employe in donneesFiltrees" :key="employe.numEmp">
+            <td
+              :style="{
+                backgroundColor: '#2c5364',
+                color: 'white',
+              }"
+            >
+              {{ employe.numEmp }}
+            </td>
+            <td
+              :style="{
+                backgroundColor: '#2c5364',
+                color: 'white',
+                textAlign: 'center',
+              }"
+            >
+              <template v-if="modeedit">
+                <input
+                  v-model="employe.nom"
+                  class="form-control form-control-sm"
+                  :style="{
+                    backgroundColor: '#2c5364',
+                    color: 'white',
+                    border: 'none',
+                  }"
+                />
+              </template>
+              <template v-else>
+                {{ employe.nom }}
+              </template>
+            </td>
+            <td :style="{ backgroundColor: '#2c5364', color: 'white' }">
+              <template v-if="modeedit">
+                <input
+                  v-model="employe.prenom"
+                  class="form-control form-control-sm"
+                  :style="{
+                    backgroundColor: '#2c5364',
+                    color: 'white',
+                    border: 'none',
+                  }"
+                />
+              </template>
+              <template v-else>
+                {{ employe.prenom }}
+              </template>
+            </td>
+            <td :style="{ backgroundColor: '#2c5364', color: 'white' }">
+              <template v-if="modeedit"
+                ><input
+                  type="number"
+                  v-model.number="employe.Salaire"
+                  class="form-control form-control-sm"
+                  :style="{
+                    backgroundColor: '#2c5364',
+                    color: 'white',
+                    border: 'none',
+                  }"
+                />
+              </template>
+              <template v-else>
+                {{ obs(employe.Salaire) }}
+              </template>
+            </td>
+            <td
+              v-if="modesupp"
+              :style="{
+                backgroundColor: '#2c5364',
+                color: 'white',
+                cursor: 'pointer',
+              }"
+            >
+              <template v-if="modesupp">
+                <span
+                  @click="supprimeEmploye(employe.numEmp)"
+                  title="Supprimer l'employé"
+                  class="fas fa-xmark"
+                  style="color: red"
+                >
+                </span>
+              </template>
+            </td>
+          </tr>
+        </transition-group>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -143,6 +147,7 @@ import { computed, onMounted, ref } from "vue";
 const employes = ref([]);
 const recherche = ref("");
 const animationaff = ref([]);
+const titre = ref("Liste des employés");
 
 const affichageprogs = async () => {
   animationaff.value = [];
@@ -198,6 +203,7 @@ const employesBackup = ref([]);
 const modifie = () => {
   employesBackup.value = JSON.parse(JSON.stringify(employes.value));
   modeedit.value = true;
+  titre.value = "Modification des employés";
 };
 const enregistre = async () => {
   try {
@@ -209,7 +215,7 @@ const enregistre = async () => {
       icon: "success",
       title: "Succès",
       text: "Modifications réussies",
-      timer: 2000,
+      timer: 3000,
       showConfirmButton: false,
       position: "center",
     });
@@ -222,6 +228,7 @@ const enregistre = async () => {
       position: "center",
     });
   }
+  titre.value = "Liste des employés";
 };
 
 ////////////////////// Suppression /////////////////////////
@@ -232,10 +239,12 @@ const annule = () => {
   }
   modesupp.value = false;
   modeedit.value = false;
+  titre.value = "Liste des employés";
 };
 
 const supprime = () => {
   modesupp.value = true;
+  titre.value = "Suppression des employés";
 };
 
 const supprimeEmploye = async (numEmp) => {
@@ -264,7 +273,7 @@ const supprimeEmploye = async (numEmp) => {
       title: "Supprimé",
       text: "Employé supprimé avec succès !",
       showConfirmButton: false,
-      timer: 2000,
+      timer: 3000,
       position: "center",
     });
   } catch (error) {
@@ -279,6 +288,35 @@ const supprimeEmploye = async (numEmp) => {
 </script>
 
 <style scoped>
+.table-container {
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #333;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+h2 {
+  color: #dfe5e7;
+  font-family: "Poetsen One", sans-serif;
+}
+
 .list {
   font-family: "Roboto", sans-serif;
   padding: 1rem;
