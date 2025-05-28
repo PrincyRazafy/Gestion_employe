@@ -73,11 +73,9 @@ h2 {
 import axios from "axios";
 import Swal from "sweetalert2";
 import { ref } from "vue";
-import { useRouter } from "vue-router";
 
 const util = ref("");
 const pwd = ref("");
-const router = useRouter();
 
 const connecter = async () => {
   if (!util.value || !pwd.value) {
@@ -94,7 +92,7 @@ const connecter = async () => {
       util: util.value,
       pwd: pwd.value,
     });
-
+    console.log(response.data);
     if (response.data.success) {
       await Swal.fire({
         icon: "success",
@@ -105,7 +103,6 @@ const connecter = async () => {
         position: "center",
       });
       localStorage.setItem("isLoggedIn", "true");
-      router.push("/MAJ");
       window.location.reload();
     } else {
       Swal.fire({

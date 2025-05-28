@@ -8,11 +8,13 @@
         <typed />
         <div class="ms-auto d-flex gap-3 fs-0">
           <router-link class="nav-link text-white" to="/ajout"
-            >Ajout</router-link
+            >Ajout d'un Employé</router-link
           >
-          <router-link class="nav-link text-white" to="/MAJ">MAJ</router-link>
+          <router-link class="nav-link text-white" to="/gestion-employes"
+            >Gestion des Employés</router-link
+          >
           <router-link class="nav-link text-white" to="/graphe"
-            >Graphe</router-link
+            >Graphe et Bilan</router-link
           >
         </div>
       </div>
@@ -74,11 +76,11 @@
 </style>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import login from "./views/login_page.vue";
-import { useRouter } from "vue-router";
 import Swal from "sweetalert2";
+import { onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
 import typed from "./components/typed_js.vue";
+import login from "./views/login_page.vue";
 
 const isLoggedIn = ref(false);
 const router = useRouter();

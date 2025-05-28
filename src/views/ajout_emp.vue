@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row text-center">
-      <h2 class="mt-4">Ajouter un employé</h2>
+      <h2 class="mt-4 ecriture">Ajouter un employé</h2>
     </div>
     <div class="row mt-3 fomu">
       <form @submit.prevent="ajouterEmploye">
@@ -88,6 +88,7 @@
   color: rgb(221, 226, 231);
   font-family: "Merriweather", serif;
   font-size: 14px;
+  animation: fadeIn 0.8s ease-in-out;
 }
 input {
   background-color: rgb(255, 255, 255);
@@ -115,6 +116,49 @@ h2 {
 .bt {
   margin-left: 23%;
   margin-top: 5px;
+}
+
+@keyframes gauche {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes droite {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+label {
+  animation: gauche 1s ease forwards;
+  opacity: 0;
+}
+
+input {
+  animation: droite 1s ease forwards;
+  opacity: 0;
 }
 </style>
 <script setup>

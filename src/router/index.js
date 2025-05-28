@@ -1,7 +1,7 @@
 import ajout_emp from "@/views/ajout_emp.vue";
+import GestionEmployes from "@/views/GestionEmployes.vue";
 import graphe_bilan from "@/views/graphe_bilan.vue";
 import Login_page from "@/views/login_page.vue";
-import mise_jour from "@/views/mise_jour.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
@@ -25,9 +25,9 @@ const routes = [
     component: ajout_emp,
   },
   {
-    path: "/MAJ",
-    name: "mise_jour",
-    component: mise_jour,
+    path: "/gestion-employes",
+    name: "GestionEmployes",
+    component: GestionEmployes,
   },
 ];
 
@@ -41,7 +41,7 @@ router.beforeEach((to, from, next) => {
   if (to.path !== "/login" && !isLoggedIn) {
     next("/login");
   } else if (to.path === "/login" && isLoggedIn) {
-    next("/MAJ");
+    next("/graphe");
   } else {
     next();
   }
