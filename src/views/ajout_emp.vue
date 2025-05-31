@@ -200,7 +200,7 @@ const ajouterEmploye = async () => {
           timer: 3000,
           position: "center",
         });
-        router.push("/MAJ");
+        router.push("/gestion-employes");
 
         nom.value = "";
         prenom.value = "";
